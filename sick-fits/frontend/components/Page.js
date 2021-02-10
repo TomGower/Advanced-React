@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import Header from './Header';
 
-// eslint-disable-next-line react/prop-types
 function Page({ children }) {
   return (
     <div>
+      <Header />
       <h2>I am the page component</h2>
       {children}
     </div>
@@ -13,9 +14,5 @@ function Page({ children }) {
 export default Page;
 
 Page.propTypes = {
-  // children: PropTypes.oneOf([
-  //   PropTypes.arrayOf(PropTypes.node),
-  //   PropTypes.node,
-  // ]),
   children: PropTypes.any,
 };
