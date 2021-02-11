@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import DisplayError from './ErrorMessage';
@@ -43,7 +44,8 @@ export default function CreateProduct() {
     CREATE_PRODUCT_MUTATON,
     {
       variables: inputs,
-      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
+      // this next line lets you refetch queries (duh) that mutation affects
+      // refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
 
@@ -55,9 +57,13 @@ export default function CreateProduct() {
 
     // createProduct is defined with variables, which can be pre-known
     // otherwise, you can pass the variables here
-    await createProduct();
-    // the response you get is the destructured {loading, error, data} from above
+    const res = await createProduct();
     clearForm();
+    // Go to that product's page
+    Router.push({
+      pathname: `/product/${res.data.createProduct.id}`,
+      // can pass other properties, check NextJS docs for those
+    });
   }
 
   return (
