@@ -8,7 +8,9 @@ export default function useForm(initialState = {}) {
     let { value, name, type } = e.target;
 
     if (type === 'number') value = +value;
-    if (type === 'file') value[0] = e.target.files;
+    if (type === 'file') {
+      [value] = e.target.files;
+    }
 
     setInputs({
       ...inputs,
