@@ -32,7 +32,7 @@ MyApp.getInitialProps = async function getInitialMyAppProps({
     pageProps = await Component.getInitialProps(ctx);
   }
   pageProps.query = ctx.query;
-  return pageProps;
+  return { pageProps };
 };
 
 // we get apollo argument from withData function, thus the need to wrap MyApp

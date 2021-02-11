@@ -67,7 +67,18 @@ export default function CreateProduct() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form
+      onSubmit={async (e) => {
+        e.preventDefault();
+        // Submit the inputfields to the backend:
+        const res = await createProduct();
+        clearForm();
+        // Go to that product's page!
+        Router.push({
+          pathname: `/product/${res.data.createProduct.id}`,
+        });
+      }}
+    >
       <DisplayError error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
