@@ -5,3 +5,8 @@ export default function IndexPage() {
     </div>
   );
 }
+
+// import ProductsPage from './products';
+
+// export default ProductsPage;
+// export { default } from './products';
