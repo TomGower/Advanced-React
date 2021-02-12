@@ -11,9 +11,16 @@ const DELETE_PRODUCT_MUTATION = gql`
   }
 `;
 
+function update(cache, payload) {
+  // console.log(payload);
+  // console.log('running the update function after delete');
+  cache.evict(cache.identify(payload.data.deleteProduct));
+}
+
 function DeleteProduct({ id, children }) {
   const [deleteProduct, { loading }] = useMutation(DELETE_PRODUCT_MUTATION, {
     variables: { id },
+    update,
   });
   function handleClick() {
     // eslint-disable-next-line no-restricted-globals
@@ -21,6 +28,7 @@ function DeleteProduct({ id, children }) {
       // delete the product
       console.log(`DELETING ${id}`);
       deleteProduct().catch((error) => alert(error.message));
+      // item still shows up on browser because it is in cache
     }
   }
   return (
