@@ -45,7 +45,7 @@ export default function CreateProduct() {
     {
       variables: inputs,
       // this next line lets you refetch queries (duh) that mutation affects
-      // refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
 
@@ -67,18 +67,7 @@ export default function CreateProduct() {
   }
 
   return (
-    <Form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        // Submit the inputfields to the backend:
-        const res = await createProduct();
-        clearForm();
-        // Go to that product's page!
-        Router.push({
-          pathname: `/product/${res.data.createProduct.id}`,
-        });
-      }}
-    >
+    <Form onSubmit={handleSubmit}>
       <DisplayError error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
