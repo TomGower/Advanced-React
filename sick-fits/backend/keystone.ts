@@ -27,6 +27,12 @@ const { withAuth } = createAuth({
     fields: ['name', 'email', 'password'],
     // TODO: add in initial roles when we get to roles
   },
+  passwordResetLink: {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async sendToken(args) {
+      console.log(args);
+    }
+  }
 });
 
 export default withAuth(
