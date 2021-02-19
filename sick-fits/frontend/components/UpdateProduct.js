@@ -51,12 +51,6 @@ function UpdateProduct({ id }) {
   // 3. get the form to handle the updates
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(
-      'inputs when sent',
-      inputs.name,
-      inputs.description,
-      inputs.price
-    );
     const response = await updateProduct({
       variables: {
         id,
