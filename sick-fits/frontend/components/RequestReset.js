@@ -19,10 +19,12 @@ function RequestReset() {
     email: '',
   });
   const [signup, { data, error, loading }] = useMutation(
-    REQUEST_RESET_MUTATION
+    REQUEST_RESET_MUTATION,
+    { variables: inputs }
   );
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log({ inputs });
     await signup().catch(console.error);
     // console.log('res', res);
     // console.log({ data, error, loading });
