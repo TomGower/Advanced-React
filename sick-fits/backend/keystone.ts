@@ -48,12 +48,12 @@ export default withAuth(
     db: {
       adapter: 'mongoose',
       url: databaseURL,
+      // TODO: Add data seeding here - DONE
       async onConnect(keystone) {
         console.log('Connected to the database');
         if (process.argv.includes('--seed-data'))
           await insertSeedData(keystone);
       },
-      // TODO: Add data seeding here
     },
     lists: createSchema({
       // schema items go in here
