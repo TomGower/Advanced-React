@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import formatMoney from '../lib/formatMoney';
+import RemoveFromCart from './RemoveFromCart';
 
 /* eslint-disable react/prop-types */
 const CartItemStyles = styled.li`
@@ -34,6 +35,7 @@ function CartItem({ item }) {
           </em>
         </p>
       </div>
+      <RemoveFromCart id={item.id} />
     </CartItemStyles>
   );
 }
