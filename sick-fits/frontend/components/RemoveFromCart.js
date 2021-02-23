@@ -21,9 +21,23 @@ const BigButton = styled.button`
   }
 `;
 
+// function doesn't need to be inside component itself
+function update(cache, payload) {
+  const id = cache.identify(payload.data.deleteCartItem);
+  cache.evict(id);
+}
+// could improve on this with optimistic response, but optimisticResponse isn't working
+
 function RemoveFromCart({ id }) {
   const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
     variables: { id },
+    update,
+    // optimisticResponse: {
+    //   deleteCartItem: {
+    //     __typename: 'CartItem',
+    //     id,
+    //   },
+    // },
   });
   return (
     <BigButton
