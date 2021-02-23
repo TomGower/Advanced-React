@@ -24,9 +24,9 @@ export default function paginationField() {
       }
       // if there are items, return them from the cache
       if (items.length) {
-        console.log(
-          `There are ${items.length} items in the cache. Will send them to Apollo`
-        );
+        // console.log(
+        //   `There are ${items.length} items in the cache. Will send them to Apollo`
+        // );
         return items;
       }
       return false; // fallback to network
@@ -39,7 +39,7 @@ export default function paginationField() {
       const { skip, first } = args;
       // runs when Apollo client comes back from network request with products
       // how items are added to cache
-      console.log(`merging items from the network, ${incoming.length}`);
+      // console.log(`merging items from the network, ${incoming.length}`);
       const merged = existing ? existing.slice(0) : [];
       // merged.push(incoming) does not just work
       // unless items are always fetched in order, need to put placeholders for 'previous' items that are not in cache
