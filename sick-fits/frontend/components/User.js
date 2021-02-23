@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
 
-export const CURRENT_USER_QUERY = gql`
+const CURRENT_USER_QUERY = gql`
   query {
     authenticatedItem {
       # authenticatedItem can be of different types, have to specify type so can specify which fields
@@ -33,3 +33,5 @@ export function useUser() {
   const { data } = useQuery(CURRENT_USER_QUERY);
   return data?.authenticatedItem;
 }
+
+export { CURRENT_USER_QUERY };
