@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
-// import { CURRENT_USER_QUERY } from './User';
 import DisplayError from './ErrorMessage';
 
 const RESET_MUTATION = gql`
