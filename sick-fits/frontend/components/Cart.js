@@ -1,18 +1,21 @@
 import CartStyles from './styles/CartStyles';
+import CloseButton from './styles/CloseButton';
 import Supreme from './styles/Supreme';
 import CartItem from './CartItem';
 import { useUser } from './User';
 import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
+import { useCart } from '../lib/cartState';
 
 function Cart() {
   const currentUser = useUser();
+  const { cartOpen, closeCart } = useCart();
   if (!currentUser) return null;
-  console.log('currentUser', currentUser);
   return (
-    <CartStyles open>
+    <CartStyles open={cartOpen}>
       <header>
         <Supreme>{currentUser.name}'s Cart</Supreme>
+        <CloseButton onClick={closeCart}>&times;</CloseButton>
       </header>
       <ul>
         {currentUser.cart.map((item) => (
