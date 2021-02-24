@@ -40,7 +40,7 @@ async function checkout(
       }
     `
   });
-  console.dir(user, { depth: null });
+  // console.dir(user, { depth: null });
 
   // 2. Calculate the total price for the order
   const cartItems = user.cart.filter(cartItem => cartItem.product);
@@ -59,6 +59,7 @@ async function checkout(
     console.log(err);
     throw new Error(err.message);
   });
+  console.log('charge', charge);
 
   // 4. Convert CartItems to OrderItems
   // 5. Create the Order and return it
