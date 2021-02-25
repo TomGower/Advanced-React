@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import formatMoney from '../lib/formatMoney';
 import RemoveFromCart from './RemoveFromCart';
 
-/* eslint-disable react/prop-types */
 const CartItemStyles = styled.li`
   padding: 1rem 0;
   border-bottom: 1px solid var(--lightGray);

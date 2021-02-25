@@ -49,7 +49,6 @@ function Search() {
   } = useCombobox({
     items,
     onInputValueChange() {
-      // console.log('input changed');
       debouncedFindItems({
         variables: {
           searchTerm: inputValue,
@@ -57,7 +56,6 @@ function Search() {
       });
     },
     onSelectedItemChange({ selectedItem }) {
-      // console.log('selected item changed');
       router.push({
         pathname: `product/${selectedItem.id}`,
       });

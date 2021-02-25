@@ -30,8 +30,6 @@ function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
     await signup().catch(console.error);
-    // console.log('res', res);
-    // console.log({ data, error, loading });
     resetForm();
   }
   return (

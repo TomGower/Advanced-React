@@ -39,7 +39,6 @@ function Order({ id }) {
       id,
     },
   });
-  console.log('id', id);
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { user, items, total, id: orderId, charge } = data.Order;

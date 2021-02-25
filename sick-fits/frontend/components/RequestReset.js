@@ -23,10 +23,7 @@ function RequestReset() {
   );
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log({ inputs });
     await signup().catch(console.error);
-    // console.log('res', res);
-    // console.log({ data, error, loading });
     resetForm();
   }
   return (

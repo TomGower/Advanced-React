@@ -51,8 +51,6 @@ export default function CreateProduct() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // console.log(inputs);
-
     // submit the input fields to the back end;
 
     // createProduct is defined with variables, which can be pre-known

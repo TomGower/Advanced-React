@@ -39,6 +39,7 @@ const CREATE_ORDER_MUTATION = gql`
 `;
 
 // const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+// this throws an error, moved into state to resolve the error based on SO post
 
 function CheckoutForm() {
   const [stateError, setStateError] = useState();
@@ -54,7 +55,6 @@ function CheckoutForm() {
     }
   );
   async function handleSubmit(e) {
-    console.log('need to do some work to handle submit');
     // 1. Stop the form from submitting and turn the loader on
     e.preventDefault();
     setLoading(true);
@@ -67,11 +67,9 @@ function CheckoutForm() {
       type: 'card',
       card: elements.getElement(CardElement),
     });
-    // console.log('paymentMethod', paymentMethod);
 
     // 4a. Handle any errors from Stripe (CC not accepted/declined, credit limit, Discover not accepted in country, etc)
     if (error) {
-      console.log('we got an error', error);
       setStateError(error);
       nProgress.done();
       return; // this stops the checkout from happening
@@ -83,7 +81,6 @@ function CheckoutForm() {
         token: paymentMethod.id,
       },
     });
-    console.log('finished with the order', order);
 
     // 5. Change page to view the order
     router.push({

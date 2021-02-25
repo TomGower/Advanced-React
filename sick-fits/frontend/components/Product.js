@@ -33,7 +33,6 @@ export default function Product({ product }) {
         <AddToCart id={product.id} />
         <DeleteProduct id={product.id}>Delete Product</DeleteProduct>
       </div>
-      {/* TODO: add buttons to edit and delete item */}
     </ItemStyles>
   );
 }
