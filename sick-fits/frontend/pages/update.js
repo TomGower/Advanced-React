@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
+import PleaseSignIn from '../components/PleaseSignIn';
 import UpdateProduct from '../components/UpdateProduct';
 
 export default function UpdatePage({ query }) {
   return (
     <div>
-      <UpdateProduct id={query.id} />
+      <PleaseSignIn>
+        <UpdateProduct id={query.id} />
+      </PleaseSignIn>
     </div>
   );
 }
