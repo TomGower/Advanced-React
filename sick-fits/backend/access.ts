@@ -25,3 +25,18 @@ export const permissions = {
     return false;
   },
 };
+
+// Rule based functions - return Boolean or set of filters that can be updated
+export const rules = {
+  canManageProducts({ session }: ListAccessArgs) {
+    // 1. do they have permission of canManageProducts?
+    if (permissions.canManageProducts({ session })) return true;
+    // 2. if not, do they own this item?
+    return { user: { id: session.itemId } };
+  },
+  canReadProducts({ session }: ListAccessArgs) {
+    if (permissions.canManageProducts({ session })) return true; // can read everything
+    // otherwise, should only see available products based on status field
+    return { status: 'AVAILABLE' };
+  },
+};
