@@ -53,4 +53,10 @@ export const rules = {
     // if they can't manage anybody's cart, is this their cart?
     return { order: { user: { id: session.itemId } } };
   },
+  canManageUsers({ session }: ListAccessArgs) {
+    if (!isSignedIn({ session })) return false;
+    if (permissions.canManageUsers({ session })) return true;
+    // otherwise may only update themselves
+    return { id: session.itemId };
+  },
 };
