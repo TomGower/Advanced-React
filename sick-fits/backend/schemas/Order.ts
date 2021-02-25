@@ -15,7 +15,7 @@ export const Order = list({
       graphQLReturnType: 'String',
       resolver(item) {
         // whatever this resolver returns is what shows up as the label
-        return `Does this matter? ${formatMoney(item.total)}`;
+        return `Order for ${formatMoney(item.total)}`;
       },
     }),
     total: integer(),

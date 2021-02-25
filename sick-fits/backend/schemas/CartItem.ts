@@ -3,7 +3,7 @@ import { list } from '@keystone-next/keystone/schema';
 import { isSignedIn, rules } from '../access';
 
 export const CartItem = list({
-  access: { 
+  access: {
     create: isSignedIn,
     read: rules.canOrder,
     update: rules.canOrder,

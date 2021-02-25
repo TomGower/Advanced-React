@@ -37,7 +37,6 @@ const { withAuth } = createAuth({
   passwordResetLink: {
     // eslint-disable-next-line @typescript-eslint/require-await
     async sendToken(args) {
-      // console.log('args', args);
       await sendPasswordResetEmail(args.token, args.identity);
     },
   },
@@ -54,7 +53,6 @@ export default withAuth(
     db: {
       adapter: 'mongoose',
       url: databaseURL,
-      // TODO: Add data seeding here - DONE
       async onConnect(keystone) {
         console.log('Connected to the database');
         if (process.argv.includes('--seed-data'))
@@ -75,7 +73,6 @@ export default withAuth(
     ui: {
       // show ui only for people who pass this test
       isAccessAllowed: ({ session }) => {
-        // console.log(session);
         return !!session?.data;
       },
     },

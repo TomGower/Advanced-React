@@ -1,6 +1,9 @@
 /* eslint-disable  */
 import { KeystoneContext } from '@keystone-next/types';
-import { CartItemCreateInput, OrderCreateInput } from '../.keystone/schema-types';
+import {
+  CartItemCreateInput,
+  OrderCreateInput,
+} from '../.keystone/schema-types';
 import stripeConfig from '../lib/stripe';
 
 const graphql = String.raw;
@@ -38,41 +41,44 @@ async function checkout(
           }
         }
       }
-    `
+    `,
   });
-  // console.dir(user, { depth: null });
 
   // 2. Calculate the total price for the order
-  const cartItems = user.cart.filter(cartItem => cartItem.product);
-  const amount = cartItems.reduce(function(tally: number, cartItem: CartItemCreateInput) {
+  const cartItems = user.cart.filter((cartItem) => cartItem.product);
+  const amount = cartItems.reduce(function (
+    tally: number,
+    cartItem: CartItemCreateInput
+  ) {
     return tally + cartItem.quantity * cartItem.product.price;
-  }, 0);
-  // console.log(amount);
+  },
+  0);
 
   // 3. Create the charge with Stripe library
-  const charge = await stripeConfig.paymentIntents.create({
-    amount,
-    currency: 'USD',
-    confirm: true,
-    payment_method: token,
-  }).catch(err => {
-    console.log('error', err);
-    throw new Error(err.message);
-  });
-  // console.log('charge', charge);
+  const charge = await stripeConfig.paymentIntents
+    .create({
+      amount,
+      currency: 'USD',
+      confirm: true,
+      payment_method: token,
+    })
+    .catch((err) => {
+      console.log('error', err);
+      throw new Error(err.message);
+    });
 
   // 4. Convert CartItems to OrderItems
-  const orderItems = cartItems.map(cartItem => {
+  const orderItems = cartItems.map((cartItem) => {
     const orderItem = {
       name: cartItem.product.name,
       description: cartItem.product.description,
       price: cartItem.product.price,
       quantity: cartItem.quantity,
-      photo: { connect: { id: cartItem.product.photo.id }},
+      photo: { connect: { id: cartItem.product.photo.id } },
       // user: { connect: { id: userId }}, // this does not need to be on here, is affiliated through Order
     };
     return orderItem;
-  })
+  });
 
   // 5. Create the Order and return it
   const order = await context.lists.Order.createOne({
@@ -85,7 +91,7 @@ async function checkout(
   });
 
   // 6. Clean up any old cart items
-  const cartItemIds = user.cart.map(cartItem => cartItem.id);
+  const cartItemIds = user.cart.map((cartItem) => cartItem.id);
   await context.lists.CartItem.deleteMany({
     ids: cartItemIds,
   });
